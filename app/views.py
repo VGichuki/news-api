@@ -7,5 +7,5 @@ def index():
     '''
     View root page function that returns data from index.html
     '''
-    return render_template('index.html')
-    
+    message = 'Daily NEWS update'
+    return render_template('index.html', message = message)
