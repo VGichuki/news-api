@@ -13,11 +13,11 @@ def index():
     return render_template('index.html', title = title, news = news)
 
 @app.route('/news/<id>')
-def article(id):
+def article(search):
     '''
     View article page that returns news data
     '''
-    article = get_article(id)
+    article = get_article(search)
     title = f"{article.title}"
 
     return render_template('article.html', article = article)
