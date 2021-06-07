@@ -15,6 +15,10 @@ class SourceTest(unittest.TestCase):
     def test_instance(self):
         self.assertTrue(isinstance(self.new_source,Source))
 
+    def test_correct_instance(self):
+        self.assertEqual(self.new_source.name,"ABC")
+
+
 if __name__ == '__main__':
     unittest.main()
 
