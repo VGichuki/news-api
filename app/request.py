@@ -68,9 +68,11 @@ def process_articles(articles_list):
         article_results.append(article_object)
     return article_results
 
-def get_article(search):
-    """Function that returns articles from a source"""
-    get_article_url = base_url + 'everything?q=' + search + '&apikey=' + api_key
+def get_article(id):
+    '''
+    Function that returns articles from a source
+    '''
+    get_article_url = base_url + 'everything?q=' + id + '&apikey=' + api_key
 
     with urllib.request.urlopen(get_article_url) as url:
         article_details_data =url.read()
@@ -82,4 +84,25 @@ def get_article(search):
             article_results = process_articles(article_results_list)
 
     return  article_results 
+
+def get_movie(id):
+    get_article_details_url = base_url.format(id,api_key)
+
+    with urllib.request.urlopen(get_article_details_url) as url:
+        article_details_data = url.read()
+        article_details_response = json.loads(article_details_data)
+
+        article_object = None
+        if article_details_response:
+            author = article_details_response.get('author')
+            title = article_details_response.get('title')
+            description = article_details_response.get('description')
+            url = article_details_response.get('url')
+            urlToImage= article_details_response.get('urlToImage')
+            publishedAt = article_details_response.get('publishedAt')
+            content = article_details_response.get('content')
+
+            article_object = Article(author,title,description,url,urlToImage,publishedAt,content)
+
+    return article_object
 
